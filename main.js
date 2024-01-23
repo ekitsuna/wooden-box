@@ -16,7 +16,11 @@ function init() {
     document.body.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry( 2, 2, 2 );
-    const material = new THREE.MeshBasicMaterial( {color: 0x006400} );
+
+    //const material = new THREE.MeshBasicMaterial( {color: 0x006400} );
+    const texture = new THREE.TextureLoader().load('textures/crate.png')
+    const material = new THREE.MeshBasicMaterial( {map: texture} );
+
     cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 
@@ -29,6 +33,14 @@ function animate() {
     cube.rotation.y += 0.01;
     renderer.render(scene, camera);
 }
+
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener('resize', onWindowResize, false);
 
 init();
 animate();
