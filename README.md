@@ -1,1 +1,2 @@
 # wooden-box
+npx vite
